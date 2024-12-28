@@ -52,65 +52,79 @@ export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"
 
 ### 10. Install Node.js Version 23
-
 nvm install 23
-11. Install pnpm
 
+
+### 11. Install pnpm
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 source /root/.bashrc
-12. Navigate to Eliza Directory
 
+
+### 12. Navigate to Eliza Directory
 cd eliza
-13. Use Node.js Version 23
 
+
+### 13. Use Node.js Version 23
 nvm use 23
-14. Get Grok API Key
-Go to x.ai/api and get your Grok API key (looks like xai-...).
 
-15. Copy Environment Example
 
+### 14. Get Grok API Key
+
+Go to [x.ai/api](https://x.ai/api) and get your Grok API key (looks like `xai-...`).
+
+### 15. Copy Environment Example
 cp .env.example .env
-16. Install Dependencies
 
+
+### 16. Install Dependencies
 pnpm i
-17. Build the Project
 
+
+### 17. Build the Project
 pnpm build
-18. Install Micro Editor
 
+
+### 18. Install Micro Editor
 apt-get install micro
-19. Edit .env File
-Open the .env file with Micro:
 
 
+### 19. Edit .env File
+
+Open the `.env` file with Micro:
 micro .env
-Look for GROK_API_KEY=<YOUR-API-KEY> and replace <YOUR-API-KEY> with your actual Grok API key. Save and exit (Ctrl+S, then Ctrl+Q).
 
-20. Navigate to Client Directory
 
+Look for `GROK_API_KEY=` and replace it with your actual Grok API key. Save and exit (`Ctrl+S`, then `Ctrl+Q`).
+
+### 20. Navigate to Client Directory
 cd client
-21. Edit Vite Configuration
-Open vite.config.ts with Micro:
 
 
+### 21. Edit Vite Configuration
+
+Open `vite.config.ts` with Micro:
 micro vite.config.ts
-Add host: '0.0.0.0'. Save and exit (Ctrl+S, then Ctrl+Q).
 
-22. Navigate to Characters Directory
 
+Add `host: '0.0.0.0'`. Save and exit (`Ctrl+S`, then `Ctrl+Q`).
+
+### 22. Navigate to Characters Directory
 cd characters
-23. Edit Trump Character JSON
-Open trump.character.json with Micro:
 
 
+### 23. Edit Trump Character JSON
+
+Open `trump.character.json` with Micro:
 micro trump.character.json
-In the client section, set ["direct"]. For modelProvider, set "grok" instead of "openai". Save and exit (Ctrl+S, then Ctrl+Q).
 
-24. Run Backend Express API
 
+In the client section, set `["direct"]`. For `modelProvider`, set `"grok"` instead of `"openai"`. Save and exit (`Ctrl+S`, then `Ctrl+Q`).
+
+### 24. Run Backend Express API
 nohup pnpm start --character="characters/trump.character.json" &
-25. Start Client
 
+
+### 25. Start Client
 pnpm start client
 
 
