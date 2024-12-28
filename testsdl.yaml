@@ -1,0 +1,89 @@
+version: "2.0"
+services:
+  app:
+    image: runpod/pytorch:2.0.1-py3.10-cuda11.8.0-devel-ubuntu22.04
+    env:
+      - SSH_PASS=test
+    expose:
+      - port: 80
+        as: 80
+        to:
+          - global: true
+      - port: 22
+        as: 22
+        proto: tcp
+        to:
+          - global: true
+      - port: 3500
+        as: 3500
+        to:
+          - global: true
+      - port: 5173
+        as: 5173
+        to:
+          - global: true
+      - port: 5000
+        as: 5000
+        to:
+          - global: true
+      - port: 3000
+        as: 3000
+        to:
+          - global: true
+      - port: 8000
+        as: 8000
+        to:
+          - global: true
+    command:
+      - bash
+      - "-c"
+    args:
+      - |
+        apt-get update && \
+        apt-get upgrade -y && \
+        apt install -y openssh-server && \
+        echo "PermitRootLogin yes" > /etc/ssh/sshd_config && \
+        echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config && \
+        echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config && \
+        echo "UsePAM no" >> /etc/ssh/sshd_config && \
+        mkdir -p /run/sshd && \
+        echo "root:$SSH_PASS" | chpasswd && \
+        /usr/sbin/sshd -D
+    params:
+      storage:
+        workspace:
+          mount: /workspace
+          readOnly: false
+        shm:
+          mount: /dev/shm
+profiles:
+  compute:
+    app:
+      resources:
+        cpu:
+          units: 30
+        memory:
+          size: 40Gi
+        storage:
+          - size: 450Gi
+          - name: workspace
+            size: 450Gi
+            attributes:
+              persistent: true
+              class: beta3
+          - name: shm
+            size: 10Gi
+            attributes:
+              class: ram
+              persistent: false
+  placement:
+    akash:
+      pricing:
+        app:
+          denom: uakt
+          amount: 100000
+deployment:
+  app:
+    akash:
+      profile: app
+      count: 1
