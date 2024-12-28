@@ -47,9 +47,16 @@ git clone https://github.com/elizaOS/eliza
 ### 9. Install NVM
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
+rhen copy paste the below and press enter 
+
+```sh
+
 export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
 [ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"
+
+```
 
 ### 10. Install Node.js Version 23
 nvm install 23
