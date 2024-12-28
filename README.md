@@ -1,6 +1,6 @@
 # ElizaOS Deployment Guide on Akash Network and Vercel
 
-This guide will walk you through the steps to deploy ElizaOS express AI and client on the Akash Network as well as the Client on Vercel
+This guide will walk you through the steps to deploy ElizaOS express API and client on the Akash Network as well as the Client on Vercel
 
 ## Prerequisites
 
